@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TravelVerse - Booking Summary</title>
+
+  <style>
+    /* ============================================================
+       1. GLOBAL SETTINGS
+    ============================================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333333;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-pad {
+      padding: 60px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 40px;
+      color: #0056b3;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #0056b3;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #004494;
+    }
+
+    /* ============================================================
+       2. NAVBAR & FOOTER
+    ============================================================ */
+    .navbar {
+      background-color: white;
+      border-bottom: 2px solid #eeeeee;
+      padding: 15px 0;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #0056b3;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .nav-links a:hover {
+      color: #0056b3;
+    }
+
+    .footer {
+      background-color: #333333;
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+
+    .footer h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #0056b3;
+    }
+
+    .footer p,
+    .footer-links a {
+      font-size: 14px;
+      color: #aaaaaa;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 8px;
+    }
+
+    .copyright {
+      border-top: 1px solid #555;
+      padding-top: 20px;
+      font-size: 12px;
+      color: #888;
+    }
+
+    /* ============================================================
+       3. SUMMARY COMPONENT
+    ============================================================ */
+    .summary-box {
+      background-color: white;
+      padding: 40px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .summary-row:last-of-type {
+      border-bottom: none;
+    }
+
+    .summary-label {
+      font-weight: bold;
+      color: #666;
+    }
+
+    .summary-value {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .summary-total {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px solid #ddd;
+      font-size: 20px;
+      color: #0056b3;
+    }
+
+    .stepper {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: bold;
+      color: #666;
+    }
+
+    .stepper span {
+      background: #0056b3;
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin: 0 5px;
+    }
+    /* ============================================================
+       UI IMPROVEMENTS & ANIMATIONS
+    ============================================================ */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    body {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    .summary-box {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .summary-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn {
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 10px rgba(0, 86, 179, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo">TravelVerse</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Step 3: Summary -->
+  <section class="section-pad">
+    <div class="container">
+
+      <div class="stepper">
+        Step 1 > Step 2 > <span>Step 3: Summary</span> > Step 4 > Done
+      </div>
+
+      <h2 class="section-title">Booking Summary</h2>
+
+      <div class="summary-box">
+
+        <div class="summary-row">
+          <span class="summary-label">Destination:</span>
+          <span class="summary-value">Goa Beaches</span>
+        </div>
+
+        <div class="summary-row">
+          <span class="summary-label">Duration:</span>
+          <span class="summary-value">5 Days Package</span>
+        </div>
+
+        <div class="summary-row">
+          <span class="summary-label">Travelers:</span>
+          <span class="summary-value">2 Adults</span>
+        </div>
+
+        <div class="summary-row">
+          <span class="summary-label">Price Base:</span>
+          <span class="summary-value">₹18,000</span>
+        </div>
+
+        <div class="summary-row">
+          <span class="summary-label">Discount:</span>
+          <span class="summary-value" style="color: #28a745;">- ₹1,800 (10% OFF)</span>
+        </div>
+
+        <div class="summary-row summary-total">
+          <span class="summary-label" style="color: #0056b3;">Total Amount:</span>
+          <span class="summary-value" style="color: #0056b3;">₹16,200</span>
+        </div>
+
+        <a href="payment.html" class="btn" style="display: block; text-align: center; margin-top: 30px;">Proceed to
+          Payment →</a>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div>
+          <h3>Contact Detail</h3>
+          <p>Email: contact@travelverse.edu</p>
+        </div>
+      </div>
+      <div class="copyright">&copy; 2026 TravelVerse.</div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

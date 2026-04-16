@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Goa Beaches - Travel Booking</title>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333333;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 60%;
+      margin: 50px auto; 
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: white;
+      border-bottom: 2px solid #eeeeee;
+      padding: 15px 0;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #0056b3;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    /* Content Area */
+    .dest-container {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 30px;
+      text-align: left;
+    }
+
+    .dest-container h1 {
+      color: #0056b3;
+    }
+
+    .dest-container p {
+      line-height: 1.6;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: bold;
+      color: #28a745;
+      margin: 20px 0;
+      padding: 10px;
+      background: #e9ecef;
+      display: inline-block;
+      border-radius: 5px;
+    }
+
+    /* Main CTA button */
+    .btn {
+      display: block;
+      width: 100%;
+      background-color: #0056b3;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #004494;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">TravelVerse</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Destination Layout -->
+  <div class="container">
+    <div class="dest-container">
+      
+      <h1>Goa Beaches</h1>
+      <p>Enjoy the beautiful beaches and vibrant nightlife in this tropical paradise on the coast.</p>
+      
+      <div class="price">Price: ₹18,000 </div>
+      
+      <!-- Redirects to Passenger details per user prompt -->
+      <a href="details.html">
+        <button class="btn">Book Now</button>
+      </a>
+
+    </div>
+  </div>
+
+</body>
+</html>

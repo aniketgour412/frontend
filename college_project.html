@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- ============================================================
+     TRAVELVERSE - College Project
+     A simple travel booking website
+     Built with: HTML + CSS only
+     Author: Your Name
+============================================================ -->
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TravelVerse - Plan Your Dream Trip</title>
+
+  <!-- Google Font: Poppins (clean, modern look) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       STEP 1: GLOBAL RESET & BASE STYLES
+       - Remove default browser margin/padding
+       - Set font and background color
+    ============================================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box; /* Makes width/height calculations easier */
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0f172a; /* Dark navy background */
+      color: #f1f5f9;            /* Light text color */
+      line-height: 1.6;
+    }
+
+    /* Remove underline from all links */
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Remove bullets from lists */
+    ul {
+      list-style: none;
+    }
+
+    /* ============================================================
+       STEP 2: REUSABLE UTILITY CLASSES
+       - These classes are used multiple times across sections
+    ============================================================ */
+
+    /* Centers content and limits its max width */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;       /* Center horizontally */
+      padding: 0 20px;      /* Side padding for mobile */
+    }
+
+    /* Section padding (top + bottom spacing) */
+    .section {
+      padding: 70px 0;
+    }
+
+    /* Section heading style - used in multiple sections */
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 10px;
+      color: #f1f5f9;
+    }
+
+    /* Small colored label above headings */
+    .section-label {
+      display: block;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #38bdf8;         /* Cyan/blue accent color */
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    /* Subtitle text below headings */
+    .section-sub {
+      text-align: center;
+      color: #94a3b8;         /* Muted gray text */
+      font-size: 0.95rem;
+      margin-bottom: 50px;
+    }
+
+    /* Main blue button style */
+    .btn {
+      display: inline-block;
+      padding: 14px 36px;
+      background-color: #0ea5e9; /* Sky blue */
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    /* Button hover: darken + slight lift */
+    .btn:hover {
+      background-color: #0284c7;
+      transform: translateY(-2px);
+    }
+
+    /* ============================================================
+       STEP 3: NAVBAR
+       - Fixed at the top of the page
+       - Logo on left, links on right
+       - Uses flexbox for layout
+    ============================================================ */
+
+    .navbar {
+      position: fixed;          /* Stays at top while scrolling */
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;             /* Always on top of other elements */
+      background-color: rgba(15, 23, 42, 0.95); /* Semi-transparent dark */
+      border-bottom: 1px solid #1e293b;
+      padding: 16px 0;
+    }
+
+    /* Flexbox layout: logo left, links right */
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Logo text styling */
+    .nav-logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+
+    /* Blue part of the logo */
+    .nav-logo span {
+      color: #38bdf8;
+    }
+
+    /* Nav links: displayed side by side */
+    .nav-links {
+      display: flex;
+      gap: 30px; /* Space between links */
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #94a3b8;
+      transition: color 0.3s ease;
+    }
+
+    /* Link hover: turn blue */
+    .nav-links a:hover {
+      color: #38bdf8;
+    }
+
+    /* ============================================================
+       STEP 4: HERO SECTION
+       - Full screen height
+       - Background image with dark overlay
+       - Centered text content
+    ============================================================ */
+
+    .hero {
+      min-height: 100vh;        /* Full screen height */
+      position: relative;       /* For overlay positioning */
+      display: flex;
+      align-items: center;      /* Vertically center content */
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* Background image */
+    .hero-bg {
+      position: absolute;
+      inset: 0;                 /* Shorthand for top/right/bottom/left = 0 */
+      background-image: url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1600&auto=format&fit=crop&q=80');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.3);  /* Dark overlay achieved with low brightness */
+    }
+
+    /* Hero text sits above the background */
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 20px;
+      max-width: 700px;
+    }
+
+    /* Big main heading */
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    /* Blue highlighted word in heading */
+    .hero-title span {
+      color: #38bdf8;
+    }
+
+    /* Short description below heading */
+    .hero-sub {
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      margin-bottom: 30px;
+    }
+
+    /* ============================================================
+       STEP 5: DESTINATIONS SECTION
+       - 3 cards displayed in a row using flexbox
+       - Each card has image, name, short description
+    ============================================================ */
+
+    .destinations {
+      background-color: #0f172a;
+    }
+
+    /* Flex row for cards */
+    .dest-grid {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;          /* Wraps to next line on small screens */
+      justify-content: center;
+    }
+
+    /* Individual destination card */
+    .dest-card {
+      background-color: #1e293b;  /* Slightly lighter dark */
+      border-radius: 12px;
+      overflow: hidden;           /* Hides image overflow outside border-radius */
+      width: 320px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Card hover: scale up + stronger shadow */
+    .dest-card:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 30px rgba(14, 165, 233, 0.2);
+    }
+
+    /* Card image */
+    .dest-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;        /* Crop image to fit without stretching */
+    }
+
+    /* Text area below image */
+    .dest-card-body {
+      padding: 20px;
+    }
+
+    .dest-card-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .dest-card-text {
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    /* ============================================================
+       STEP 6: PACKAGES SECTION
+       - 3 pricing cards
+       - Middle card is highlighted ("Most Popular")
+    ============================================================ */
+
+    .packages {
+      background-color: #0b1120; /* Slightly different dark shade */
+    }
+
+    /* Flex row for package cards */
+    .pkg-grid {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Individual package card */
+    .pkg-card {
+      background-color: #1e293b;
+      border-radius: 12px;
+      padding: 32px 28px;
+      width: 300px;
+      border: 1px solid #334155;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .pkg-card:hover {
+      transform: translateY(-6px);
+    }
+
+    /* Highlighted (popular) card */
+    .pkg-card.popular {
+      border-color: #38bdf8;
+      background-color: #172035;
+      box-shadow: 0 0 24px rgba(56, 189, 248, 0.15);
+    }
+
+    /* "Most Popular" badge */
+    .pkg-badge {
+      display: inline-block;
+      background-color: #0ea5e9;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    .pkg-name {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    /* Big price text */
+    .pkg-price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #38bdf8;
+      margin: 10px 0;
+    }
+
+    .pkg-price small {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      font-weight: 400;
+    }
+
+    .pkg-desc {
+      font-size: 0.84rem;
+      color: #94a3b8;
+      margin-bottom: 24px;
+      line-height: 1.7;
+    }
+
+    /* Package button: outline style for normal, filled for popular */
+    .pkg-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    /* Normal card: outline button */
+    .pkg-btn-outline {
+      background-color: transparent;
+      border: 2px solid #38bdf8;
+      color: #38bdf8;
+    }
+
+    .pkg-btn-outline:hover {
+      background-color: #38bdf8;
+      color: #fff;
+    }
+
+    /* Popular card: filled button */
+    .pkg-btn-filled {
+      background-color: #0ea5e9;
+      border: 2px solid #0ea5e9;
+      color: #fff;
+    }
+
+    .pkg-btn-filled:hover {
+      background-color: #0284c7;
+    }
+
+    /* ============================================================
+       STEP 7: BOOKING FORM SECTION
+       - Simple form with inputs for booking
+       - Clean layout using flexbox grid
+    ============================================================ */
+
+    .booking {
+      background-color: #0f172a;
+    }
+
+    /* Centered form container */
+    .form-card {
+      max-width: 680px;
+      margin: 0 auto;
+      background-color: #1e293b;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Two inputs side by side on desktop */
+    .form-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;        /* Stack on mobile */
+    }
+
+    /* Form field wrapper */
+    .form-group {
+      flex: 1;                /* Grow to fill space */
+      min-width: 200px;       /* Don't shrink below this on mobile */
+      margin-bottom: 18px;
+    }
+
+    /* Labels */
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* Input fields */
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 1.5px solid #334155;
+      background-color: #0f172a;
+      color: #f1f5f9;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      outline: none;                       /* Remove default browser outline */
+      transition: border-color 0.3s ease;
+    }
+
+    /* Input focus: blue border highlight */
+    .form-group input:focus {
+      border-color: #38bdf8;
+    }
+
+    /* Placeholder text color */
+    .form-group input::placeholder {
+      color: #475569;
+    }
+
+    /* Submit button - full width */
+    .form-submit {
+      width: 100%;
+      padding: 14px;
+      background-color: #0ea5e9;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-top: 6px;
+    }
+
+    .form-submit:hover {
+      background-color: #0284c7;
+      transform: translateY(-2px);
+    }
+
+    /* ============================================================
+       STEP 8: WHY CHOOSE US SECTION
+       - 3 simple feature boxes
+    ============================================================ */
+
+    .why {
+      background-color: #0b1120;
+    }
+
+    /* Flex row for 3 boxes */
+    .why-grid {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Individual feature box */
+    .why-card {
+      background-color: #1e293b;
+      border-radius: 12px;
+      padding: 32px 24px;
+      width: 300px;
+      text-align: center;
+      border: 1px solid #334155;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .why-card:hover {
+      border-color: #38bdf8;
+      transform: translateY(-4px);
+    }
+
+    /* Icon circle */
+    .why-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: rgba(56, 189, 248, 0.12); /* Light blue tint */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin: 0 auto 16px;
+    }
+
+    .why-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .why-desc {
+      font-size: 0.84rem;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       STEP 9: FOOTER
+       - Simple 3-column footer using flexbox
+       - Copyright text at bottom
+    ============================================================ */
+
+    .footer {
+      background-color: #080f1e;
+      padding: 50px 0 24px;
+      border-top: 1px solid #1e293b;
+    }
+
+    /* 3-column layout */
+    .footer-grid {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .footer-col {
+      min-width: 180px;
+    }
+
+    /* Logo in footer */
+    .footer-logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .footer-logo span {
+      color: #38bdf8;
+    }
+
+    .footer-desc {
+      font-size: 0.84rem;
+      color: #64748b;
+      line-height: 1.8;
+    }
+
+    /* Column heading */
+    .footer-col-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #f1f5f9;
+      margin-bottom: 14px;
+    }
+
+    /* Footer links list */
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: #64748b;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #38bdf8;
+    }
+
+    /* Bottom bar with copyright */
+    .footer-bottom {
+      border-top: 1px solid #1e293b;
+      padding-top: 20px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #475569;
+    }
+
+    /* ============================================================
+       STEP 10: RESPONSIVE DESIGN
+       - Adjustments for smaller screens (mobile/tablet)
+       - Use @media query to detect screen width
+    ============================================================ */
+
+    @media (max-width: 768px) {
+
+      /* Navbar: hide links on mobile, show only logo */
+      .nav-links {
+        gap: 16px;
+      }
+
+      /* Hero heading smaller on mobile */
+      .hero-title {
+        font-size: 2.2rem;
+      }
+
+      /* Stack cards vertically */
+      .dest-grid,
+      .pkg-grid,
+      .why-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* Each card takes full width on mobile */
+      .dest-card,
+      .pkg-card,
+      .why-card {
+        width: 100%;
+        max-width: 420px;
+      }
+
+      /* Form takes full width */
+      .form-card {
+        padding: 28px 20px;
+      }
+
+      /* Form rows stack vertically */
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      /* Footer columns stack */
+      .footer-grid {
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      /* Section title smaller */
+      .section-title {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAVBAR
+       - Fixed navigation bar at the top
+       - Logo on the left, links on the right
+  ============================================================ -->
+  <header>
+    <nav class="navbar">
+      <div class="container">
+        <!-- Logo -->
+        <div class="nav-logo">Travel<span>Verse</span></div>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#destinations">Destinations</a></li>
+          <li><a href="#packages">Packages</a></li>
+          <li><a href="#booking">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- ============================================================
+       HERO SECTION
+       - Full-screen section with background image
+       - Main heading, description, and a call-to-action button
+  ============================================================ -->
+  <section class="hero" id="home">
+    <!-- Background image (darkened with filter) -->
+    <div class="hero-bg"></div>
+
+    <!-- Main content on top of background -->
+    <div class="hero-content">
+      <h1 class="hero-title">Plan Your <span>Dream Trip</span></h1>
+      <p class="hero-sub">
+        Explore breathtaking destinations around the world. 
+        Book curated packages and create memories that last forever.
+      </p>
+      <a href="#packages" class="btn">Start Booking</a>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       DESTINATIONS SECTION
+       - Shows 3 popular destinations as cards
+       - Each card has image, name, description
+  ============================================================ -->
+  <section class="section destinations" id="destinations">
+    <div class="container">
+
+      <!-- Section heading -->
+      <span class="section-label">Popular Places</span>
+      <h2 class="section-title">Top Destinations</h2>
+      <p class="section-sub">Handpicked places you will absolutely love</p>
+
+      <!-- Destination Cards -->
+      <div class="dest-grid">
+
+        <!-- Card 1: Goa -->
+        <div class="dest-card">
+          <img
+            src="https://images.unsplash.com/photo-1614082242765-7c98ca0f3df3?w=600&auto=format&fit=crop&q=80"
+            alt="Goa Beach"
+          />
+          <div class="dest-card-body">
+            <div class="dest-card-name">🏖️ Goa, India</div>
+            <p class="dest-card-text">
+              Famous for golden beaches, vibrant nightlife, and delicious seafood.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 2: Manali -->
+        <div class="dest-card">
+          <img
+            src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&auto=format&fit=crop&q=80"
+            alt="Manali Mountains"
+          />
+          <div class="dest-card-body">
+            <div class="dest-card-name">🏔️ Manali, India</div>
+            <p class="dest-card-text">
+              A beautiful hill station with snow-capped peaks and adventure sports.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 3: Dubai -->
+        <div class="dest-card">
+          <img
+            src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&auto=format&fit=crop&q=80"
+            alt="Dubai Skyline"
+          />
+          <div class="dest-card-body">
+            <div class="dest-card-name">🌆 Dubai, UAE</div>
+            <p class="dest-card-text">
+              A city of luxury, towering skyscrapers, and world-class shopping.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PACKAGES SECTION
+       - Shows 3 pricing packages
+       - Middle one is highlighted as "Most Popular"
+  ============================================================ -->
+  <section class="section packages" id="packages">
+    <div class="container">
+
+      <span class="section-label">Pricing Plans</span>
+      <h2 class="section-title">Choose a Package</h2>
+      <p class="section-sub">Simple, transparent pricing — no hidden charges</p>
+
+      <!-- Package Cards -->
+      <div class="pkg-grid">
+
+        <!-- Package 1: 3 Days -->
+        <div class="pkg-card">
+          <div class="pkg-name">Quick Escape</div>
+          <div class="pkg-price">₹5,000 <small>/ day</small></div>
+          <p class="pkg-desc">
+            3 Days &amp; 2 Nights<br/>
+            Hotel stay, sightseeing tour,<br/>
+            breakfast included.
+          </p>
+          <button class="pkg-btn pkg-btn-outline">Book Now</button>
+        </div>
+
+        <!-- Package 2: 5 Days (MOST POPULAR — highlighted) -->
+        <div class="pkg-card popular">
+          <span class="pkg-badge">⭐ Most Popular</span>
+          <div class="pkg-name">Premium Adventure</div>
+          <div class="pkg-price">₹6,000 <small>/ day</small></div>
+          <p class="pkg-desc">
+            5 Days &amp; 4 Nights<br/>
+            5-Star hotel, all meals,<br/>
+            spa + travel guide.
+          </p>
+          <button class="pkg-btn pkg-btn-filled">Book Now</button>
+        </div>
+
+        <!-- Package 3: 7 Days -->
+        <div class="pkg-card">
+          <div class="pkg-name">Grand Tour</div>
+          <div class="pkg-price">₹5,714 <small>/ day</small></div>
+          <p class="pkg-desc">
+            7 Days &amp; 6 Nights<br/>
+            Multi-city trip, all meals,<br/>
+            travel insurance included.
+          </p>
+          <button class="pkg-btn pkg-btn-outline">Book Now</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BOOKING FORM SECTION
+       - Simple form to collect booking details
+       - Name, Email, Phone, Date inputs
+  ============================================================ -->
+  <section class="section booking" id="booking">
+    <div class="container">
+
+      <span class="section-label">Book Now</span>
+      <h2 class="section-title">Make a Booking</h2>
+      <p class="section-sub">Fill in your details and we'll get back to you within 24 hours</p>
+
+      <!-- Form Card -->
+      <div class="form-card">
+
+        <!-- Row 1: Name + Email side by side -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="e.g. Anike Sharma" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="you@example.com" />
+          </div>
+        </div>
+
+        <!-- Row 2: Phone + Date side by side -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="+91 98765 43210" />
+          </div>
+          <div class="form-group">
+            <label for="date">Travel Date</label>
+            <input type="date" id="date" />
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="form-submit">🚀 Confirm Booking</button>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       WHY CHOOSE US SECTION
+       - 3 simple feature boxes explaining benefits
+  ============================================================ -->
+  <section class="section why" id="why">
+    <div class="container">
+
+      <span class="section-label">Our Promise</span>
+      <h2 class="section-title">Why Choose Us?</h2>
+      <p class="section-sub">We make travel simple, safe, and affordable</p>
+
+      <!-- Feature Cards -->
+      <div class="why-grid">
+
+        <!-- Feature 1: Safe -->
+        <div class="why-card">
+          <div class="why-icon">🛡️</div>
+          <div class="why-title">100% Safe &amp; Secure</div>
+          <p class="why-desc">
+            All bookings are verified and protected. 
+            Your personal data is always kept private.
+          </p>
+        </div>
+
+        <!-- Feature 2: Affordable -->
+        <div class="why-card">
+          <div class="why-icon">💰</div>
+          <div class="why-title">Best Price Guarantee</div>
+          <p class="why-desc">
+            We offer the best prices for every destination. 
+            No hidden charges — what you see is what you pay.
+          </p>
+        </div>
+
+        <!-- Feature 3: Support -->
+        <div class="why-card">
+          <div class="why-icon">📞</div>
+          <div class="why-title">24/7 Customer Support</div>
+          <p class="why-desc">
+            Our support team is available round the clock 
+            to help you at every step of your journey.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+       - 3-column layout: brand info, quick links, support
+       - Copyright at the bottom
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+
+      <!-- Footer Top Grid -->
+      <div class="footer-grid">
+
+        <!-- Column 1: Brand -->
+        <div class="footer-col">
+          <div class="footer-logo">Travel<span>Verse</span></div>
+          <p class="footer-desc">
+            Your trusted travel partner.<br />
+            Making every trip memorable<br />
+            since 2020.
+          </p>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div class="footer-col">
+          <div class="footer-col-title">Explore</div>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#destinations">Destinations</a></li>
+            <li><a href="#packages">Packages</a></li>
+            <li><a href="#booking">Book Now</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Support Links -->
+        <div class="footer-col">
+          <div class="footer-col-title">Support</div>
+          <ul class="footer-links">
+            <li><a href="#">Help Centre</a></li>
+            <li><a href="#">Cancellation</a></li>
+            <li><a href="#">Refund Policy</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+
+      </div><!-- end footer-grid -->
+
+      <!-- Footer Bottom Bar -->
+      <div class="footer-bottom">
+        <p>© 2026 TravelVerse. All rights reserved. | Designed for college project purposes.</p>
+      </div>
+
+    </div>
+  </footer>
+
+
+</body>
+</html>
